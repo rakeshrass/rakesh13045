@@ -14,11 +14,11 @@
     	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
     	<!-- to convert the images into bytes and to store in the database -->
     	</bean>
-	<context:component-scan base-package="com.niit" /> <!--scan the base package-->
-	<mvc:annotation-driven/> <!-- to configure the annotations -->
-		<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" /> <!-- images path -->
+	<context:component-scan base-package="com.howtodoinjava" /> 
+	<mvc:annotation-driven/> 
+	
 	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver"> 
-		<property name="prefix" value="/WEB-INF/view/" />  <!--it specifies the path of jsp files  -->
+		<property name="prefix" value="/WEB-INF/view/" />  
         <property name="suffix" value=".jsp" />  
         
 	</bean>

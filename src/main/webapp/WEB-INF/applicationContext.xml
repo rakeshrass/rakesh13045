@@ -27,9 +27,10 @@
 		<property name="packagesToScan">
 			<list>
 				<!--  <value>com.niit.shoppingcart</value> -->
-				<value>com.niit.shoppingcart.controllers</value>
-				<value>com.niit.shoppingcart.dao</value>
-				<value>com.niit.shoppingcart.model</value>
+				<value>com.howtodoinjava.demo.controller</value>
+				<value>com.howtodoinjava.dao</value>
+				<value>com.howtodoinjava.model</value>
+				<value>com.howtodoinjava.sevices</value>
 				
 			</list>
 		</property>
