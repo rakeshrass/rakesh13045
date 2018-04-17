@@ -1,31 +1,29 @@
 package com.rakesh.restapi;
 
 import java.util.ArrayList;
+
+import java.sql.*;
+
 import java.util.List;
 
 public class AlienRepositary {
 	
 	List<Alien> aliens;
-	
+	 Connection con =null;
 	public AlienRepositary()
 	{
-		aliens =new ArrayList<>();
+		String url = "jdbc:mysql://localhost:3306/rest";
+		String username= "root";
+		String password= "rass";
 		
-		Alien a1 = new Alien();
-	    a1.setId(101);
-		a1.setName("rakesh");
-		a1.setPoint(96);
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			con =DriverManager.getConnection(url,username,password);
+		}
 		
-		
-		Alien a2 = new Alien();
-		   a1.setId(102);
-		a2.setName("swathi");
-		a2.setPoint(27);
-		
-		
-		aliens.add(a1);
-		aliens.add(a2);
-		
+		catch(Exception e){
+			System.out.println(e);
+		}
 		
 	}
 	
@@ -33,31 +31,89 @@ public class AlienRepositary {
 	
 	public List<Alien> getAliens()
 	{
+	List <Alien> aliens= new ArrayList<>();
+	
+	String sql ="select *from alien";
+	 try{
+		  Statement st =con.createStatement();
+		  ResultSet rs = st.executeQuery(sql);
+		  
+		  while(rs.next()){
+			  Alien a= new Alien();
+			  a.setId(rs.getInt(1));
+			  a.setName(rs.getString(2));
+			  a.setPoint(rs.getInt(3));
+			  
+			  aliens.add(a);
+		  }
+	 }
+		  catch (Exception e)
+		  {
+			  System.out.println(e);
+			  
+		  }
+		  
+	
+		
+	
+		
 		return aliens;
 	}
 	
 
 	public Alien getAlien(int id){
+		String sql ="select *from alien where id="+id;
+		  Alien a= new Alien();
+		 try{
+			  Statement st =con.createStatement();
+			  ResultSet rs = st.executeQuery(sql);
+			  
+			if(rs.next()){
+				
+				  a.setId(rs.getInt(1));
+				  a.setName(rs.getString(2));
+				  a.setPoint(rs.getInt(3));
+				  
+				  aliens.add(a);
+			  }
+		 }
+			  catch (Exception e)
+			  {
+				  System.out.println(e);
+				  
+			  }
+			  
 		
-		Alien a1 = null;
-		for(Alien a:aliens)
-		{
-			if(a.getId()==id)
 		
 				return a;
 		
+
+	}
+	
+	public void create(Alien a1){
+		String sql = "insert into values(?,?,?)";
+		
+		try{
+			  PreparedStatement st =con.prepareStatement(sql);
+			  st.setInt(1, a1.getId());
+			  st.setString(2, a1.getName());
+			  st.setInt(3,a1.getPoint());
+			 st.executeUpdate();
+			  
+			 
+		 }
+			  catch (Exception e)
+			  {
+				  System.out.println(e);
+				  
+			  }
 		
 	}
 	
-		
-		return null;
-	}
 	
 	
 	
-	
-	
-	
+}
 	
 	
 	
@@ -70,4 +126,4 @@ public class AlienRepositary {
 	
 	
 
-}
+

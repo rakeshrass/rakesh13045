@@ -34,5 +34,10 @@ public class Alien {
 		this.point = point;
 	}
 
+	@Override
+	public String toString() {
+		return "Alien [id=" + id + ", name=" + name + ", point=" + point + "]";
+	}
+
 	
 }
